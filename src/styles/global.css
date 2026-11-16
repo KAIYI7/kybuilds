@@ -340,15 +340,30 @@ figure {
 }
 
 figcaption {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--accent);
   color: var(--muted);
   font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.caption-label {
+  display: block;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.caption-text {
+  display: block;
+  text-wrap: pretty;
 }
 
 .gallery {
   display: grid;
-  gap: 1.75rem;
-  margin-top: 2.5rem;
+  gap: 2.5rem;
+  margin-top: 3rem;
 }
 
 .gallery h2 {

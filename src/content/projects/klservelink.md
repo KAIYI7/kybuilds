@@ -10,8 +10,9 @@ cover:
   - /projects/klservelink/recommendations.jpg
   - /projects/klservelink/booking.jpg
   - /projects/klservelink/dynamic-pricing.jpg
-coverAlt: Three KLServeLink phone screens showing recommended services, a booking confirmation and the dynamic pricing editor.
-coverCaption: Recommended services, a confirmed booking and the provider's dynamic pricing editor.
+coverAlt: Three KLServeLink phone screens showing recommended services, a successful booking request and the dynamic pricing editor.
+coverLabel: Customer and provider screens
+coverCaption: "Left to right: recommended services, a booking request sent to the provider, and the provider's dynamic pricing caps."
 ---
 
 KLServeLink is a marketplace app connecting customers with service providers. Both roles use the same Flutter app.

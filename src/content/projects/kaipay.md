@@ -8,13 +8,17 @@ repo: https://github.com/KAIYI7/KaiPay
 summary: A simulated payment platform built around a transactional outbox, crash-recoverable authorization and double-entry accounting.
 cover: /projects/kaipay/dashboard.jpg
 coverAlt: KaiPay merchant dashboard showing simulated balance, gross volume, fees, refunds and a list of recent payments with their statuses.
+coverLabel: Merchant dashboard
+coverCaption: Simulated balance, gross volume, fees and refunds in MYR, above the merchant's recent payments and their statuses.
 gallery:
   - src: /projects/kaipay/outbox-stream.jpg
     alt: Outbox stream view listing payment events with their type, status, retry count and publish time.
-    caption: Outbox stream. Events written with each payment and published from PostgreSQL to Kafka.
+    label: Outbox stream
+    caption: Payment events published from PostgreSQL to Kafka, with each event's status, retry count and publish time.
   - src: /projects/kaipay/double-entry-ledger.jpg
     alt: Journal detail for a payment refund with three ledger lines whose debits and credits both total RM 40.00.
-    caption: A refund journal. Debits and credits balance to the sen.
+    label: Refund journal
+    caption: Three ledger lines for one refund. Debits and credits both total RM 40.00.
 ---
 
 KaiPay is a simulated payment platform. It does not move real money. I built it to work through the problems that make payment backends hard: keeping the database and the message broker consistent, recovering from a crash mid-payment, and never refunding more than was captured.

@@ -11,8 +11,20 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
-const { title, tagline, date, order, stack, repo, summary, cover, coverAlt, coverCaption, gallery } =
-  project.data;
+const {
+  title,
+  tagline,
+  date,
+  order,
+  stack,
+  repo,
+  summary,
+  cover,
+  coverAlt,
+  coverLabel,
+  coverCaption,
+  gallery,
+} = project.data;
 ---
 
 <Base title={`${title} — ${site.name}`} description={summary}>
@@ -28,7 +40,14 @@ const { title, tagline, date, order, stack, repo, summary, cover, coverAlt, cove
     </div>
     <figure class="project-cover">
       <Cover title={title} order={order} cover={cover} coverAlt={coverAlt} />
-      {coverCaption && <figcaption>{coverCaption}</figcaption>}
+      {
+        (coverLabel || coverCaption) && (
+          <figcaption>
+            {coverLabel && <span class="caption-label">{coverLabel}</span>}
+            {coverCaption && <span class="caption-text">{coverCaption}</span>}
+          </figcaption>
+        )
+      }
     </figure>
     <article class="prose">
       <Content />
@@ -42,7 +61,12 @@ const { title, tagline, date, order, stack, repo, summary, cover, coverAlt, cove
               <a href={g.src}>
                 <img src={g.src} alt={g.alt} loading="lazy" />
               </a>
-              {g.caption && <figcaption>{g.caption}</figcaption>}
+              {(g.label || g.caption) && (
+                <figcaption>
+                  {g.label && <span class="caption-label">{g.label}</span>}
+                  {g.caption && <span class="caption-text">{g.caption}</span>}
+                </figcaption>
+              )}
             </figure>
           ))}
         </section>

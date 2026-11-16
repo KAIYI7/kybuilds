@@ -16,10 +16,19 @@ const projects = defineCollection({
     // Use a list of portrait screenshots to show phone screens side by side.
     cover: z.union([z.string(), z.array(z.string())]).optional(),
     coverAlt: z.string().optional(),
+    // Captions describe only what the screenshot shows: a short label, then one sentence.
+    coverLabel: z.string().optional(),
     coverCaption: z.string().optional(),
     // Extra screenshots shown at the end of the project page.
     gallery: z
-      .array(z.object({ src: z.string(), alt: z.string(), caption: z.string().optional() }))
+      .array(
+        z.object({
+          src: z.string(),
+          alt: z.string(),
+          label: z.string().optional(),
+          caption: z.string().optional(),
+        }),
+      )
       .optional(),
   }),
 });
