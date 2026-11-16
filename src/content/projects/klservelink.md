@@ -6,6 +6,12 @@ order: 3
 stack: [Flutter, Dart, TypeScript, Firebase, Python, FastAPI, Google Cloud Run]
 repo: https://github.com/KAIYI7/klservelink
 summary: A two-sided service marketplace with server-authoritative booking, dynamic pricing and a batch analytics service.
+cover:
+  - /projects/klservelink/recommendations.jpg
+  - /projects/klservelink/booking.jpg
+  - /projects/klservelink/dynamic-pricing.jpg
+coverAlt: Three KLServeLink phone screens showing recommended services, a booking confirmation and the dynamic pricing editor.
+coverCaption: Recommended services, a confirmed booking and the provider's dynamic pricing editor.
 ---
 
 KLServeLink is a marketplace app connecting customers with service providers. Both roles use the same Flutter app.

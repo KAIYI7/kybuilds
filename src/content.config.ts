@@ -12,9 +12,15 @@ const projects = defineCollection({
     stack: z.array(z.string()),
     repo: z.string().url(),
     summary: z.string(),
-    // Optional preview image: a path under public/, e.g. /projects/kaipay.png
-    cover: z.string().optional(),
+    // Optional preview. Paths are under public/, e.g. /projects/kaipay/dashboard.jpg
+    // Use a list of portrait screenshots to show phone screens side by side.
+    cover: z.union([z.string(), z.array(z.string())]).optional(),
     coverAlt: z.string().optional(),
+    coverCaption: z.string().optional(),
+    // Extra screenshots shown at the end of the project page.
+    gallery: z
+      .array(z.object({ src: z.string(), alt: z.string(), caption: z.string().optional() }))
+      .optional(),
   }),
 });
 

@@ -11,7 +11,8 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
-const { title, tagline, date, order, stack, repo, summary, cover, coverAlt } = project.data;
+const { title, tagline, date, order, stack, repo, summary, cover, coverAlt, coverCaption, gallery } =
+  project.data;
 ---
 
 <Base title={`${title} — ${site.name}`} description={summary}>
@@ -25,11 +26,27 @@ const { title, tagline, date, order, stack, repo, summary, cover, coverAlt } = p
       </ul>
       <a class="btn" href={repo}>View source on GitHub</a>
     </div>
-    <div class="project-cover">
+    <figure class="project-cover">
       <Cover title={title} order={order} cover={cover} coverAlt={coverAlt} />
-    </div>
+      {coverCaption && <figcaption>{coverCaption}</figcaption>}
+    </figure>
     <article class="prose">
       <Content />
     </article>
+    {
+      gallery && (
+        <section class="gallery">
+          <h2>Screenshots</h2>
+          {gallery.map((g) => (
+            <figure>
+              <a href={g.src}>
+                <img src={g.src} alt={g.alt} loading="lazy" />
+              </a>
+              {g.caption && <figcaption>{g.caption}</figcaption>}
+            </figure>
+          ))}
+        </section>
+      )
+    }
   </div>
 </Base>

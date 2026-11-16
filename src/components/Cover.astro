@@ -1,24 +1,22 @@
 ---
-// Project cover. Shows the image when `cover` is set in the project's
-// frontmatter, otherwise a tinted panel with the project name.
+// Project cover. `cover` in the project's frontmatter is one image path, or a
+// list of portrait screenshots shown side by side. Without it, a tinted panel
+// with the project name is shown.
 interface Props {
   title: string;
   order: number;
-  cover?: string;
+  cover?: string | string[];
   coverAlt?: string;
 }
 
 const { title, order, cover, coverAlt } = Astro.props;
 const hues = [162, 28, 215, 280];
 const hue = hues[(order - 1) % hues.length];
+const images = cover ? [cover].flat() : [];
+const alt = coverAlt ?? `${title} preview`;
 ---
 
-<div class="cover" style={`--hue:${hue}`}>
-  {
-    cover ? (
-      <img src={cover} alt={coverAlt ?? `${title} preview`} loading="lazy" />
-    ) : (
-      <span aria-hidden="true">{title}</span>
-    )
-  }
+<div class:list={['cover', { image: images.length === 1, phones: images.length > 1 }]} style={`--hue:${hue}`}>
+  {images.length === 0 && <span aria-hidden="true">{title}</span>}
+  {images.map((src, i) => <img src={src} alt={i === 0 ? alt : ''} loading="lazy" />)}
 </div>
