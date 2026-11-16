@@ -12,6 +12,9 @@ const projects = defineCollection({
     stack: z.array(z.string()),
     repo: z.string().url(),
     summary: z.string(),
+    // Optional preview image: a path under public/, e.g. /projects/kaipay.png
+    cover: z.string().optional(),
+    coverAlt: z.string().optional(),
   }),
 });
 

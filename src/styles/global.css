@@ -6,6 +6,10 @@
   --border: #e4e0d9;
   --accent: #0f6e56;
   --accent-soft: #e3f1ec;
+  --band: #f2efe9;
+  --cover-bg: 40% 90%;
+  --cover-line: 35% 82%;
+  --cover-ink: 45% 28%;
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
   --mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
   color-scheme: light dark;
@@ -20,6 +24,10 @@
     --border: #2e302c;
     --accent: #5fd0ae;
     --accent-soft: #1d2f29;
+    --band: #1a1b19;
+    --cover-bg: 25% 17%;
+    --cover-line: 25% 24%;
+    --cover-ink: 50% 76%;
   }
 }
 
@@ -43,7 +51,7 @@ body {
 }
 
 .wrap {
-  max-width: 44rem;
+  max-width: 48rem;
   margin: 0 auto;
   padding: 0 1.25rem;
 }
@@ -78,13 +86,19 @@ h1 {
 }
 
 h2 {
-  font-family: var(--mono);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin: 0 0 1.25rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.5rem;
+}
+
+h2::before {
+  content: '';
+  display: block;
+  width: 2rem;
+  height: 3px;
+  margin-bottom: 0.75rem;
+  border-radius: 2px;
+  background: var(--accent);
 }
 
 h3 {
@@ -143,7 +157,6 @@ li {
 
 .site-footer {
   border-top: 1px solid var(--border);
-  margin-top: 4rem;
   padding-top: 1.5rem;
   padding-bottom: 2.5rem;
   color: var(--muted);
@@ -152,7 +165,7 @@ li {
 
 /* Home */
 .hero {
-  padding: 3rem 0 1rem;
+  padding: 3rem 0 4rem;
 }
 
 .hero .lead {
@@ -184,8 +197,18 @@ li {
   color: var(--accent);
 }
 
-section {
-  padding-top: 3.25rem;
+.band {
+  padding: 3.5rem 0;
+  scroll-margin-top: 1rem;
+}
+
+.band.alt {
+  background: var(--band);
+  border-block: 1px solid var(--border);
+}
+
+.band .wrap > :last-child {
+  margin-bottom: 0;
 }
 
 .row {
@@ -210,12 +233,13 @@ section {
 
 .cards {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .card {
-  display: block;
-  padding: 1.15rem 1.25rem;
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--surface);
@@ -225,6 +249,52 @@ section {
 
 .card:hover {
   border-color: var(--accent);
+}
+
+.card-body {
+  padding: 1.15rem 1.25rem;
+}
+
+.card .cover {
+  height: 100%;
+  min-height: 9.5rem;
+  aspect-ratio: auto;
+}
+
+@media (max-width: 40rem) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .card .cover {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+}
+
+.cover {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: hsl(var(--hue) var(--cover-bg));
+  background-image:
+    linear-gradient(hsl(var(--hue) var(--cover-line)) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--hue) var(--cover-line)) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  background-position: center;
+  color: hsl(var(--hue) var(--cover-ink));
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .card p {
@@ -286,9 +356,18 @@ section {
   text-decoration: none;
 }
 
+.project {
+  padding-bottom: 4rem;
+}
+
 .project-head {
-  padding: 2rem 0 1.5rem;
-  border-bottom: 1px solid var(--border);
+  padding: 2rem 0 1.75rem;
+}
+
+.project-cover .cover {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 2rem;
 }
 
 .project-head h1 {
@@ -306,6 +385,8 @@ section {
 
 .prose h2 {
   margin-top: 2rem;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .prose li {

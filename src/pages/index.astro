@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Cover from '../components/Cover.astro';
 import { site } from '../site';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
@@ -8,101 +9,121 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 
 <Base>
   <div class="hero">
-    <h1>{site.name}</h1>
-    <p class="lead">
-      Backend-focused software developer. I work with Java, Spring Boot and SQL, and I like the
-      parts of a system where correctness matters: transactions, event-driven processing and
-      concurrency control.
-    </p>
-    <p class="lead">
-      Final-year Software Engineering student, graduating January 2027. Looking for an entry-level
-      backend or software engineering role in Singapore.
-    </p>
-    <div class="links">
-      <a class="btn" href={site.github}>GitHub</a>
-      <a class="btn" href={site.linkedin}>LinkedIn</a>
-      {site.email && <a class="btn" href={`mailto:${site.email}`}>Email</a>}
+    <div class="wrap">
+      <h1>{site.name}</h1>
+      <p class="lead">
+        Backend-focused software developer. I work with Java, Spring Boot and SQL, and I like the
+        parts of a system where correctness matters: transactions, event-driven processing and
+        concurrency control.
+      </p>
+      <p class="lead">
+        Final-year Software Engineering student, graduating January 2027. Looking for an
+        entry-level backend or software engineering role in Singapore.
+      </p>
+      <div class="links">
+        <a class="btn" href={site.github}>GitHub</a>
+        <a class="btn" href={site.linkedin}>LinkedIn</a>
+        {site.email && <a class="btn" href={`mailto:${site.email}`}>Email</a>}
+      </div>
     </div>
   </div>
 
-  <section id="experience">
-    <h2>Experience</h2>
-    <div class="row">
-      <h3>Backend Software Engineering Intern</h3>
-      <span class="when">Jun 2026 – Nov 2026</span>
-    </div>
-    <p class="sub">Alphawave Innovations Sdn Bhd · Kuala Lumpur, Malaysia</p>
-    <p>Worked on the development and maintenance of payment platforms in Java and Spring Boot.</p>
-    <ul>
-      <li>
-        Corrected merchant bank-inheritance and payout-transition logic so that independently
-        maintained banking records were preserved while stale inherited details were cleared.
-      </li>
-      <li>
-        Implemented configurable masking of password-reset tokens in notification logs, and
-        validated the behaviour with local tests and MongoDB inspection.
-      </li>
-      <li>
-        Resolved failures in historical payment reports caused by removed channel configurations
-        by updating the API handling.
-      </li>
-    </ul>
-  </section>
-
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="cards">
-      {
-        projects.map((p) => (
-          <a class="card" href={`/projects/${p.id}/`}>
-            <div class="row">
-              <h3>{p.data.title}</h3>
-              <span class="when">{p.data.date}</span>
-            </div>
-            <p>{p.data.summary}</p>
-            <ul class="tags">
-              {p.data.stack.map((s) => (
-                <li>{s}</li>
-              ))}
-            </ul>
-          </a>
-        ))
-      }
+  <section id="experience" class="band alt">
+    <div class="wrap">
+      <h2>Experience</h2>
+      <div class="row">
+        <h3>Backend Software Engineering Intern</h3>
+        <span class="when">Jun 2026 – Nov 2026</span>
+      </div>
+      <p class="sub">Alphawave Innovations Sdn Bhd · Kuala Lumpur, Malaysia</p>
+      <p>Worked on the development and maintenance of payment platforms in Java and Spring Boot.</p>
+      <ul>
+        <li>
+          Corrected merchant bank-inheritance and payout-transition logic so that independently
+          maintained banking records were preserved while stale inherited details were cleared.
+        </li>
+        <li>
+          Implemented configurable masking of password-reset tokens in notification logs, and
+          validated the behaviour with local tests and MongoDB inspection.
+        </li>
+        <li>
+          Resolved failures in historical payment reports caused by removed channel configurations
+          by updating the API handling.
+        </li>
+      </ul>
     </div>
   </section>
 
-  <section id="education">
-    <h2>Education</h2>
-    <div class="row">
-      <h3>Bachelor of Software Engineering (Honours)</h3>
-      <span class="when">Nov 2023 – Jan 2027 (expected)</span>
+  <section id="projects" class="band">
+    <div class="wrap">
+      <h2>Projects</h2>
+      <div class="cards">
+        {
+          projects.map((p) => (
+            <a class="card" href={`/projects/${p.id}/`}>
+              <Cover
+                title={p.data.title}
+                order={p.data.order}
+                cover={p.data.cover}
+                coverAlt={p.data.coverAlt}
+              />
+              <div class="card-body">
+                <div class="row">
+                  <h3>{p.data.title}</h3>
+                  <span class="when">{p.data.date}</span>
+                </div>
+                <p>{p.data.summary}</p>
+                <ul class="tags">
+                  {p.data.stack.map((s) => (
+                    <li>{s}</li>
+                  ))}
+                </ul>
+              </div>
+            </a>
+          ))
+        }
+      </div>
     </div>
-    <p class="sub">
-      Tunku Abdul Rahman University of Management and Technology (TAR UMT), Kuala Lumpur
-    </p>
-    <p>CGPA 3.97 / 4.00 · President's List, 6 awards</p>
   </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <dl class="skills">
-      <dt>Languages</dt>
-      <dd>Java, SQL, Python, C#, Dart</dd>
-      <dt>Frameworks & data</dt>
-      <dd>Spring Boot, Spring Data JPA, PostgreSQL, MySQL, Apache Kafka, Flutter</dd>
-      <dt>Tools</dt>
-      <dd>Git, GitLab, Docker, Maven, Postman</dd>
-      <dt>Spoken</dt>
-      <dd>English, Mandarin, Malay</dd>
-    </dl>
+  <section id="education" class="band alt">
+    <div class="wrap">
+      <h2>Education</h2>
+      <div class="row">
+        <h3>Bachelor of Software Engineering (Honours)</h3>
+        <span class="when">Nov 2023 – Jan 2027 (expected)</span>
+      </div>
+      <p class="sub">
+        Tunku Abdul Rahman University of Management and Technology (TAR UMT), Kuala Lumpur
+      </p>
+      <p>CGPA 3.97 / 4.00 · President's List, 6 awards</p>
+    </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>
-      The best way to reach me is through <a href={site.linkedin}>LinkedIn</a>. My code is on
-      <a href={site.github}>GitHub</a>.
-      {site.email && <>You can also email <a href={`mailto:${site.email}`}>{site.email}</a>.</>}
-    </p>
+  <section id="skills" class="band">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt>Languages</dt>
+        <dd>Java, SQL, Python, C#, Dart</dd>
+        <dt>Frameworks & data</dt>
+        <dd>Spring Boot, Spring Data JPA, PostgreSQL, MySQL, Apache Kafka, Flutter</dd>
+        <dt>Tools</dt>
+        <dd>Git, GitLab, Docker, Maven, Postman</dd>
+        <dt>Spoken</dt>
+        <dd>English, Mandarin, Malay</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="contact" class="band alt">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p>
+        The best way to reach me is through <a href={site.linkedin}>LinkedIn</a>. My code is on
+        <a href={site.github}>GitHub</a>.
+        {site.email && <>You can also email <a href={`mailto:${site.email}`}>{site.email}</a>.</>}
+      </p>
+    </div>
   </section>
 </Base>

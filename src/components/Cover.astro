@@ -1,0 +1,24 @@
+---
+// Project cover. Shows the image when `cover` is set in the project's
+// frontmatter, otherwise a tinted panel with the project name.
+interface Props {
+  title: string;
+  order: number;
+  cover?: string;
+  coverAlt?: string;
+}
+
+const { title, order, cover, coverAlt } = Astro.props;
+const hues = [162, 28, 215, 280];
+const hue = hues[(order - 1) % hues.length];
+---
+
+<div class="cover" style={`--hue:${hue}`}>
+  {
+    cover ? (
+      <img src={cover} alt={coverAlt ?? `${title} preview`} loading="lazy" />
+    ) : (
+      <span aria-hidden="true">{title}</span>
+    )
+  }
+</div>
