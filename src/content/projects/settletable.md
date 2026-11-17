@@ -6,16 +6,16 @@ order: 2
 stack: [Python, SQLite, RapidOCR (ONNX Runtime), JavaScript, Docker, Cloudflare Tunnel]
 repo: https://github.com/KAIYI7/settle-table
 summary: Splits a restaurant bill to the exact cent across shared items, taxes, service charges and discounts, with receipt OCR and shared editing.
-cover: /projects/settletable/portion-allocation.png
+cover: /projects/settletable/portion-allocation.jpg
 coverAlt: SettleTable item allocation screen where each dish on the bill is assigned to diners by portion.
 coverLabel: Item allocation
 coverCaption: Each item on the receipt is assigned to diners by portion until it is fully allocated.
 gallery:
-  - src: /projects/settletable/payer-reconciliation.png
+  - src: /projects/settletable/payer-reconciliation.jpg
     alt: Table of what each diner consumed and paid to the restaurant, with net balances summing to RM 0.00.
     label: Payer reconciliation
     caption: What each diner consumed against what they paid the restaurant. Net balances sum to RM 0.00.
-  - src: /projects/settletable/peer-settlement.png
+  - src: /projects/settletable/peer-settlement.jpg
     alt: Outstanding balances table and a form to record a reimbursement between two diners.
     label: Peer settlement
     caption: A suggested repayment, the balances still outstanding, and the form for recording a reimbursement between diners.
